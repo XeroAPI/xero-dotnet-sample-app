@@ -1,0 +1,35 @@
+@model dynamic
+
+<h2>Xero Cashflow Statement</h2>
+
+@*
+    Cash Flow Response Details
+*@
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Opening Cash Balance</th>
+        <th>Closing Cash Balance</th>
+        <th>Net Cash Movement</th>
+    </tr>
+    <tr>
+        <td>@Model.StartDate.ToString("d/MM/yy")</td>
+        <td>@Model.EndDate.ToString("d/MM/yy")</td>
+        <td>@Model.CashBalance.OpeningCashBalance</td>
+        <td>@Model.CashBalance.ClosingCashBalance</td>
+        <td>@Model.CashBalance.NetCashMovement</td>
+    </tr>
+</table>
+
+<hr />
+<br />
+
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

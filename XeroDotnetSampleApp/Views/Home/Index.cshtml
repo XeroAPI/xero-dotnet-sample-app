@@ -1,0 +1,60 @@
+@model dynamic
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h2 style="font-weight:bold; text-align: center;">
+        Welcome to Xero-Dotnet-AppStore-Sample-App.
+    </h2>
+    <br>
+    <p>
+        This sample app is a combination of other .NET sample apps designed to create a single repo for everything needed for developing an app to integrate with Xero API.
+        <br>
+        <br>
+        In here you will find the following sample codes:
+    </p>
+    <ol>
+        <li>The original netstandard sample app with various API endpoints already operational in net9 target framework</li>
+        <li>Webhook sample code, this is further expanded to operate with Xero App Store Subscription</li>
+        <li>Sign up with Xero (Recommended Flow) which will create user in SQLite database with the user info by using MS entity framework core</li>
+        <li>Xero App Store Subscription sample code, make sure you set up the webhooks and subscription plans for your app from Xero developer portal to utilise this sample app</li>
+    </ol>
+</div>
+
+<br>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Sign Up with Xero Example Link</th>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="" asp-controller="SignUpWithXero" asp-action="ExecuteSignUpWithXero" style="text-decoration:underline; color: blue;">www.awesomeapp.com/xero-ssu</a>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>Above link is a mock version URL for showcasing Sign Up with Xero.</strong><br>
+             <br>
+             <ol>
+                <li>It will lead the user to log into Xero, ask for access to retrieve user information as listed in the scope above OpenID, Profile, Email, Accounting Settings and Offline Access</li>
+                <li>Once allowed to share, the requested values will be sent to your redirect URI for you to create user account.</li>
+                <li>For this sample app, the account will be saved in the local SQLite database, if the user already exists, it will update the user's information</li>
+                <li>If your on-boarding flow requires manual approach, the data can be used to pre-fill contact us or registration form (Sign Up with Xero modified flow) instead. In this case, we recommend removing offline_access from scope request.</li>
+                <li>You do not need to request for accounting.settings scope if you only wish to grab user info at this stage - this also ensures the user does not yet get considered as a referral.</li>
+            </ol>
+            When you are applying for Xero App Partnership Program, please Create a link similar to this when creating your own app and provide it to us the URL in form under "Purchase/Sign up page URL".<br>
+            <br>
+            <strong>Note.</strong><br>
+            <ul>
+                <li>It is really <span style="color: red";>important</span> that you do not request for "offline access" scope for Sign Up with Xero flow as this may end up creating a ghost referral should the user discontinue your service without disconnecting their organisations and you also didn't implement the disconnection from your side</li>
+                <li>If the user is already logged into Xero, the request for access to data will popup straight away</li>
+                    <ul>
+                        <li>You can Remove access for the apps using your Xero account by going to <a href="https://identity.xero.com/account/apps/">https://identity.xero.com/account/apps/</a></li>
+                        <li>Once you removed the access for your app, next time you try to do Sign Up with Xero flow, OAuth2.0 flow will ask for the permission again</li>
+                    </ul>
+            </ul>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,74 @@
+@model dynamic
+
+<h2>Xero Referral Users Table</h2>
+
+<p>All of the users who are registered in SignUpWithXeroUsers.db are listed here</p>
+<br>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>XeroUserId</th>
+                <th>Email</th>
+                <th class="wide-col">Given Name</th>
+                <th class="wide-col">Family Name</th>
+                <th>Tenant ID</th>
+                <th class="wide-col">Tenant Name</th>
+                <th>Auth Event ID</th>
+                <th>When Connection Was Created</th>
+                <th>Tenant Short Code</th>
+                <th>Tenant Country Code</th>
+                <th>When Account Was Created</th>
+                <th>Subscription ID</th>
+                <th class="wide-col">Subscription Plan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.XeroUserId</td>
+                    <td>@user.Email</td>
+                    <td class="wide-col">@user.GivenName</td>
+                    <td class="wide-col">@user.FamilyName</td>
+                    <td>@user.TenantId</td>
+                    <td class="wide-col">@user.TenantName</td>
+                    <td>@user.AuthEventId</td>
+                    <td>@user.ConnectionCreatedDateUtc</td>
+                    <td>@user.TenantShortCode</td>
+                    <td>@user.TenantCountryCode</td>
+                    <td>@user.AccountCreatedDateTime</td>
+                    <td>@user.SubscriptionId</td>
+                    <td class="wide-col">@Html.Raw(user.SubscriptionPlan)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<style>
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table-responsive table {
+    width: auto;
+    min-width: 100%;
+}
+
+.table-responsive th,
+.table-responsive td {
+    text-align: center;
+    vertical-align: middle !important;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+/* Apply wrapping and wider width only to .wide-col columns */
+.table-responsive .wide-col {
+    white-space: nowrap;       /* Default: don't wrap */
+    word-break: keep-all;        /* Don’t break mid-word */
+}
+</style>

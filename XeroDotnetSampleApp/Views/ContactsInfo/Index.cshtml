@@ -1,0 +1,26 @@
+@model dynamic
+
+<h2>Xero Contacts</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    @foreach (var contact in Model) {
+        <tr>
+            <td>@contact.Name</td>
+            <td>@contact.EmailAddress</td>
+        </tr>
+    }
+</table>
+
+<hr/>
+<br/>
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

@@ -1,0 +1,24 @@
+@model dynamic
+
+<h2>Xero Bank Statements Plus</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Account Id</th>
+        <th>Account Name</th>
+    </tr>
+    <tr>
+        <td>@Model?.BankAccountId.ToString().Substring(0,8)</td>
+        <td>@Model?.BankAccountName</td>
+    </tr>
+</table>
+
+<hr/>
+<br/>
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

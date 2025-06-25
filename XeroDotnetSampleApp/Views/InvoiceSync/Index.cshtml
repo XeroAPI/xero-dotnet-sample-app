@@ -1,0 +1,40 @@
+@model dynamic
+
+<h2>Xero Invoices in the Last 7 Days</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Invoice #</th>
+        <th>To</th>
+        <th>Date</th>
+        <th>Due Date</th>
+        <th>Total Due</th>
+        <th>Attachment</th>
+    </tr>
+    @foreach (var invoice in Model) {
+        <tr>
+            <td>@invoice.InvoiceNumber</td>
+            <td>@invoice.Contact.Name</td>
+            <td>@invoice.Date.ToString("d MMMM yyyy")</td>
+            <td>@invoice.DueDate.ToString("d MMMM yyyy")</td>
+            <td>@invoice.Total</td>
+            <td>
+                <form method="post" enctype="multipart/form-data" asp-controller="InvoiceSync" asp-action="Upload">
+                    <input class="form-control" type="file" name="files" multiple />
+                    <input class="form-control" type="hidden" name="invoiceId" value="@invoice.InvoiceID.ToString()"/>
+                    <input class="btn btn-primary" type="submit" value="Upload" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

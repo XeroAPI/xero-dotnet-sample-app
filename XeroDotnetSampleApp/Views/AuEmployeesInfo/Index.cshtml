@@ -1,0 +1,32 @@
+@model dynamic
+
+<h2>Xero AU Payroll Employees</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Job Title</th>
+        <th>Gender</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var employee in Model) {
+        <tr>
+            <td>@employee.FirstName</td>
+            <td>@employee.LastName</td>
+            <td>@employee.JobTitle</td>
+            <td>@employee.Gender</td>
+            <td>@employee.Status</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

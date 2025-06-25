@@ -1,0 +1,46 @@
+@model dynamic
+
+<h2>Xero Files</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>File Name</th>
+        <th>MimeType</th>
+        <th>Size</th>
+        <th>CreatedDateUtc</th>
+        <th>UpdatedDateUtc</th>
+        <th>Id</th>
+        <th>Folder Id</th>
+        <th>Rename</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.MimeType</td>
+            <td>@(item.Size / 1024) KB</td>
+            <td>@item.CreatedDateUtc.ToString("d/MM/yy")</td>
+            <td>@item.UpdatedDateUtc.ToString("d/MM/yy")</td>
+            <td>@item.Id?.ToString().Substring(0,8)</td>
+            <td>@item.FolderId?.ToString().Substring(0,8)</td>
+            <td>
+                <button class="btn btn-link" onclick="location.href='@Url.Action("Modify", new { fileID = @item.Id })'">Rename</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { fileID = @item.Id })'">Delete</button>
+            </td>
+        </tr>
+    }
+</table>
+
+<hr>
+<br>
+
+<h5>Upload New File</h5>
+
+<form method="post" enctype="multipart/form-data" asp-controller="FilesSync" asp-action="Upload">
+    <input class="form-control" type="file" name="files" multiple />
+    <br/>
+    <input class="btn btn-primary form-control" type="submit" value="Upload New File" />
+</form>

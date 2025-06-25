@@ -1,0 +1,29 @@
+@model Xero.NetStandard.OAuth2.Model.Accounting.Organisation
+
+<h2>Organisation Information</h2>
+
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Name</th>
+        <th>Organisation Id</th>
+        <th>EntityType</th>
+        <th>BaseCurrency</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.OrganisationID</td>
+        <td>@Model.OrganisationEntityType</td>
+        <td>@Model.BaseCurrency</td>
+    </tr>
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

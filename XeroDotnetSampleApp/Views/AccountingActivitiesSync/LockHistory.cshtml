@@ -1,0 +1,44 @@
+@model dynamic
+
+<h2>Locking of Accounting Books History</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Organisation Id</th>
+        <th>End Date</th>
+    </tr>
+    <tr>
+        <td>@Model.OrganisationId.ToString().Substring(0,8)</td>
+        <td>@Model.EndDate.ToString("d/MM/yy")</td>
+    </tr>
+</table>
+
+<br/>
+
+<p class="h5">Lock History Dates</p>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Hard Lock Date</th>
+        <th>Soft Lock Date</th>
+        <th>Updated Date</th>
+    </tr>
+    @foreach (var lockModel in Model.LockDates)
+    {
+        <tr>
+            <td>@lockModel.HardLockDate.ToString("d/MM/yy")</td>
+            <td>@lockModel.SoftLockDate.ToString("d/MM/yy")</td>
+            <td>@lockModel.UpdatedDateUtc.ToString("d/MM/yy")</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

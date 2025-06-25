@@ -1,0 +1,51 @@
+@model dynamic
+
+<h2>Xero Contact Expense</h2>
+
+
+@*
+    Income by Contact Response Details
+*@
+
+<p class="h5">Contact Expense Details:</p>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td>@Model.StartDate.ToString("d/MM/yy")</td>
+        <td>@Model.EndDate.ToString("d/MM/yy")</td>
+        <td>@Model.Total</td>
+    </tr>
+</table>
+
+<br/>
+
+<p class="h5">Associated Contacts:</p>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Name</th>
+        <th>Total</th>
+    </tr>
+    @foreach(var contact in Model.Contacts)
+    {
+        <tr>
+            <td>@contact.Name</td>
+            <td>@contact.Total</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

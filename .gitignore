@@ -1,0 +1,27 @@
+# Once pulled, during development alternate below appsettings.json part
+XeroDotnetSampleApp/appsettings.json
+XeroDotnetSampleApp/appsettings.Development.json
+
+# Build outputs
+XeroDotnetSampleApp/bin/*
+XeroDotnetSampleApp/obj/*
+
+# Database files
+XeroDotnetSampleApp/Migrations
+*.db
+*.db-shm
+*.db-wal
+
+*.gz
+*.swp
+*.*~
+*.pyc
+
+# Visual Studio Code
+XeroDotnetSampleApp/.vscode/*
+
+# User-specific files
+XeroDotnetSampleApp/non_tenanted_xerotoken.json
+XeroDotnetSampleApp/state.json
+XeroDotnetSampleApp/tenantid.json
+XeroDotnetSampleApp/xerotoken.json

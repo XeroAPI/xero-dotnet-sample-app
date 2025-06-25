@@ -1,0 +1,52 @@
+@model dynamic
+
+<h2>Xero User Activities</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Organisation Id</th>
+        <th>Data Month</th>
+    </tr>
+
+    <tr>
+        <td>@Model.OrganisationId</td>
+        <td>@Model.DataMonth</td>
+    </tr>
+    
+</table>
+
+<br/>
+
+<p class="h5">Users</p>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Name</th>
+        <th>User Created</th>
+        <th>Last Login</th>
+        <th>Is External Partner</th>
+        <th>Has Accountant Role</th>
+        <th>Number of Logins</th>
+    </tr>
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <td>@user.UserId.ToString().Substring(0,8)</td>
+            <td>@user.UserCreatedDateUtc.ToString("d/MM/yy")</td>
+            <td>@user.LastLoginDateUtc.ToString("d/MM/yy")</td>
+            <td>@user.IsExternalPartner</td>
+            <td>@user.HasAccountantRole</td>
+            <td>@user.NumberOfLogins</td>
+        </tr>
+    }
+</table>
+
+<hr/>
+<br/>
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

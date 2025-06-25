@@ -1,0 +1,33 @@
+﻿@model dynamic
+
+<h2>Tax Rates</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Name</th>
+        <th>Tax Type</th>
+        <th>Status</th>
+        <th>Display Rate</th>
+        <th>Effective Rate</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.TaxType.ToString()</td>
+            <td>@item.Status.ToString()</td>
+            <td>@item.DisplayTaxRate</td>
+            <td>@item.EffectiveRate</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

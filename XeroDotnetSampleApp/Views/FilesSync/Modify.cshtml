@@ -1,0 +1,20 @@
+@model dynamic
+
+
+<h2>Renaming File: @Model.Name</h2>
+
+<form method="POST">
+    <br />
+    <label name="fileId" value="@Model.Id"></label>
+    <label>New File Name:</label>
+    <input class="form-control" type="text" value="@Model.Name" id="name" name="name" required />
+    <br />
+    <br />
+    <input class="btn btn-primary" type="submit" />
+</form>
+
+<br />
+<br />
+
+<button class="btn btn-link" onclick="location.href='@Url.Action("Index", "FilesSync")'">Back</button>
+

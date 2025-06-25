@@ -1,0 +1,45 @@
+@model dynamic
+
+<h2>Report History Within a Given Period</h2>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Organisation Id</th>
+        <th>End Date</th>
+    </tr>
+    <tr>
+        <td>@Model.OrganisationId.ToString().Substring(0,8)</td>
+        <td>@Model.EndDate.ToString("d/MM/yy")</td>
+    </tr>
+    
+</table>
+
+<br/>
+
+<p class="h5">Report History Entries</p>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Report Name</th>
+        <th>Report Date Text</th>
+        <th>Published Date</th>
+    </tr>
+    @foreach (var report in Model.Reports)
+    {
+        <tr>
+            <td>@report.Name</td>
+            <td>@report.ReportDateText</td>
+            <td>@report.PublishedDate.ToString("d/MM/yy")</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>

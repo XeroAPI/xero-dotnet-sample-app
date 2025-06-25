@@ -1,0 +1,53 @@
+@model dynamic
+
+<h2>Xero Account Activities for the Past 12 Months</h2>
+
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Organisation Id</th>
+        <th>Start Month</th>
+        <th>End Month</th>
+    </tr>
+    <tr>
+        <td>@Model.OrganisationId.ToString().Substring(0,8)</td>
+        <td>@Model.StartMonth</td>
+        <td>@Model.EndMonth</td>
+    </tr>
+</table>
+
+<br/>
+
+<p class="h5">Account Usage Details</p>
+
+<table class="table table-responsive-lg">
+    <tr>
+        <th>Month</th>
+        <th>Account Name</th>
+        <th>Total Received</th>
+        <th>Total Paid</th>
+        <th>Count Received</th>
+        <th>Count Paid</th>
+    </tr>
+    @foreach (var account in Model.AccountUsage)
+    {
+        <tr>
+            <td>@account.Month</td>
+            <td>@account.AccountName</td>
+            <td>@account.TotalReceived</td>
+            <td>@account.TotalPaid</td>
+            <td>@account.CountReceived</td>
+            <td>@account.CountPaid</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<br />
+
+@*
+    Raw JSON Response
+*@
+
+<p class="h5">Raw JSON Response:</p>
+<textarea class="form-control" readonly style="height: 350px">@ViewBag.jsonResponse</textarea>
