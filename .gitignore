@@ -18,7 +18,7 @@ XeroDotnetSampleApp/Migrations
 *.pyc
 
 # Visual Studio Code
-XeroDotnetSampleApp/.vscode/*
+# .vscode/*
 
 # User-specific files
 XeroDotnetSampleApp/non_tenanted_xerotoken.json
