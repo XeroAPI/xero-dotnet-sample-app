@@ -36,22 +36,25 @@
     </tr>
     <tr>
         <td><strong>Above link is a mock version URL for showcasing Sign Up with Xero.</strong><br>
-             <br>
-             <ol>
+            <ol>
                 <li>It will lead the user to log into Xero, ask for access to retrieve user information as listed in the scope above OpenID, Profile, Email, Accounting Settings and Offline Access</li>
                 <li>Once allowed to share, the requested values will be sent to your redirect URI for you to create user account.</li>
                 <li>For this sample app, the account will be saved in the local SQLite database, if the user already exists, it will update the user's information</li>
-                <li>If your on-boarding flow requires manual approach, the data can be used to pre-fill contact us or registration form (Sign Up with Xero modified flow) instead. In this case, we recommend removing offline_access from scope request.</li>
+                <li>If your on-boarding flow requires manual approach, the data can be used to pre-fill contact us or registration form (Sign Up with Xero modified flow) instead.</li>
                 <li>You do not need to request for accounting.settings scope if you only wish to grab user info at this stage - this also ensures the user does not yet get considered as a referral.</li>
             </ol>
             When you are applying for Xero App Partnership Program, please Create a link similar to this when creating your own app and provide it to us the URL in form under "Purchase/Sign up page URL".<br>
             <br>
             <strong>Note.</strong><br>
             <ul>
-                <li>It is really <span style="color: red";>important</span> that you do not request for "offline access" scope for Sign Up with Xero flow as this may end up creating a ghost referral should the user discontinue your service without disconnecting their organisations and you also didn't implement the disconnection from your side</li>
+                <li>It is really <span style="color: red";>important</span> that you implement the disconnection capability from your admin side for unwanted user connection</li>
+                    <ul>
+                        <li>Make sure you record the User ID, Tenant ID and Connection ID whenever a new connection is established</li>
+                        <li>Use <a href="https://devblog.xero.com/discover-xeros-client-credentials-with-postman-965f3581cbfc">client credential method</a> to manage the connections</li>
+                    </ul>
                 <li>If the user is already logged into Xero, the request for access to data will popup straight away</li>
                     <ul>
-                        <li>You can Remove access for the apps using your Xero account by going to <a href="https://identity.xero.com/account/apps/">https://identity.xero.com/account/apps/</a></li>
+                        <li>You can remove access for the apps using your Xero account by going to <a href="https://identity.xero.com/account/apps/">https://identity.xero.com/account/apps/</a></li>
                         <li>Once you removed the access for your app, next time you try to do Sign Up with Xero flow, OAuth2.0 flow will ask for the permission again</li>
                     </ul>
             </ul>
