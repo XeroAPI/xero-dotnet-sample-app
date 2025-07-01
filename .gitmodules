@@ -1,6 +1,0 @@
-[submodule "SDKs/Xero-NetStandard"]
-	path = SDKs/Xero-NetStandard
-	url = https://github.com/XeroAPI/Xero-NetStandard
-[submodule "SDKs/Xero-OpenAPI"]
-	path = SDKs/Xero-OpenAPI
-	url = https://github.com/XeroAPI/Xero-OpenAPI
