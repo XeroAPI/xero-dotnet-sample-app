@@ -25,3 +25,5 @@ XeroDotnetSampleApp/non_tenanted_xerotoken.json
 XeroDotnetSampleApp/state.json
 XeroDotnetSampleApp/tenantid.json
 XeroDotnetSampleApp/xerotoken.json
+XeroDotnetSampleApp.sln
+.gitmodules
