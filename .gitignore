@@ -1,6 +1,6 @@
 # Once pulled, during development alternate below appsettings.json part
-# XeroDotnetSampleApp/appsettings.json
-# XeroDotnetSampleApp/appsettings.Development.json
+XeroDotnetSampleApp/appsettings.json
+XeroDotnetSampleApp/appsettings.Development.json
 
 # Build outputs
 XeroDotnetSampleApp/bin/*
@@ -18,7 +18,7 @@ XeroDotnetSampleApp/Migrations
 *.pyc
 
 # Visual Studio Code
-# XeroDotnetSampleApp/.vscode/*
+XeroDotnetSampleApp/.vscode/*
 
 # User-specific files
 XeroDotnetSampleApp/non_tenanted_xerotoken.json
