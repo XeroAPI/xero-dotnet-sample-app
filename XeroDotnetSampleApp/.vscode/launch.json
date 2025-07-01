@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": ".NET Core Launch (web)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/XeroDotnetSampleApp/bin/Debug/net9.0/XeroDotnetSampleApp.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/XeroDotnetSampleApp",
+        "stopAtEntry": false,
+        "logging": {
+          "console": true,
+          "debug": true
+        },
+        "serverReadyAction": {
+          "action": "openExternally",
+          "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        },
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development",
+
+          "XeroConfiguration__ClientId": "YOUR_CLIENT_ID",
+          "XeroConfiguration__ClientSecret": "YOUR_CLIENT_SECRET",
+          "XeroConfiguration__CallbackUri": "https://localhost:5001/Authorization/Callback",
+          "XeroConfiguration__Scope": "offline_access openid profile email files accounting.transactions accounting.settings accounting.contacts accounting.attachments payroll.employees payroll.payruns payroll.payslip payroll.settings payroll.timesheets assets projects projects.read",
+          "XeroConfiguration__State": "my_state",
+
+          "SignUpWithXeroSettings__CallbackUri": "https://localhost:5001/SignUpWithXero/Callback",
+          "SignUpWithXeroSettings__SignUpWithXeroScope": "openid profile email accounting.settings offline_access",
+
+          "WebhookSettings__XeroSignature": "x-xero-signature",
+          "WebhookSettings__WebhookKey": "YOUR_WEBHOOK_KEY",
+
+          "DatabaseConfiguration__DatabaseConnectionString": "Data Source=SignUpWithXeroUsers.db"
+        },
+        "sourceFileMap": {
+          "/Views": "${workspaceFolder}/Views"
+        }
+      }
+    ]
+}
