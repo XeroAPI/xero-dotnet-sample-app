@@ -35,6 +35,13 @@ namespace XeroDotnetSampleApp.Services
                 .FirstOrDefaultAsync(user => user.TenantId == tenantId);
         }
 
+        // Finds a user in the database by Xero User ID
+        public async Task<SignUpWithXeroUser> GetByXeroUserID(string xeroUserID)
+        {
+            return await _userContext.SignUpWithXeroUsers
+            .FirstOrDefaultAsync(user => user.XeroUserId == xeroUserID);
+        }
+
         // Finds a user in the database by SubscriptionId
         public async Task<SignUpWithXeroUser> FindUserBySubscriptionId(string subscriptionId)
         {

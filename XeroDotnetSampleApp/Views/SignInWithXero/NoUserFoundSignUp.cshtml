@@ -1,0 +1,78 @@
+@model XeroDotnetSampleApp.Models.SignUpWithXeroUser
+@{
+    ViewData["Title"] = "No Account Found – Complete Sign Up";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <div>
+                    We couldn’t find an app account for <strong>@Model.Email</strong>.<br/>
+                    Please complete your registration below using your Xero details we’ve prefilled.<br/>
+                    This process is now mimicking the Sign Up with Xero - Modified flow.<br/>
+                    The user data retrieved during login process used to prefill the form ready for registration.
+                </div>
+            </div>
+
+            <h1 class="h5 mb-3">Complete Your Registration</h1>
+
+            <form asp-action="CompleteSignUpWithXero" asp-controller="SignInWithXero" method="post">
+                @Html.AntiForgeryToken()
+
+                <!-- Hidden fields required by the model but not edited by the user -->
+                <input type="hidden" asp-for="XeroUserId" />
+                <input type="hidden" asp-for="TenantId" />
+                <input type="hidden" asp-for="AuthEventId" />
+                <input type="hidden" asp-for="ConnectionCreatedDateUtc" />
+                <input type="hidden" asp-for="TenantShortCode" />
+                <input type="hidden" asp-for="TenantCountryCode" />
+                <input type="hidden" name="AccountCreatedDateTime" value="@Model.AccountCreatedDateTime.ToString("o")" />
+                <input type="hidden" asp-for="SubscriptionId" />
+                <input type="hidden" asp-for="SubscriptionPlan" />
+
+                <table class="table table-bordered align-middle">
+                    <tbody>
+                        <tr>
+                            <th style="width: 30%"><label asp-for="Email" class="form-label"></label></th>
+                            <td>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="GivenName" class="form-label"></label></th>
+                            <td>
+                                <input asp-for="GivenName" class="form-control" />
+                                <span asp-validation-for="GivenName" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="FamilyName" class="form-label"></label></th>
+                            <td>
+                                <input asp-for="FamilyName" class="form-control" />
+                                <span asp-validation-for="FamilyName" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="TenantName" class="form-label"></label></th>
+                            <td>
+                                <input asp-for="TenantName" class="form-control" />
+                                <span asp-validation-for="TenantName" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex align-items-center">
+                    <button type="submit" class="btn btn-primary mr-3">Create Account</button>
+                    <a class="btn btn-outline-secondary" href="@Url.Action("Index","Home")">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

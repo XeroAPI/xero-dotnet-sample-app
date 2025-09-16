@@ -1,63 +1,102 @@
 @model dynamic
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to Xero Dotnet Sample App";
 }
 
-<div>
-    <h2 style="font-weight:bold; text-align: center;">
-        Welcome to Xero-Dotnet-AppStore-Sample-App.
-    </h2>
-    <br>
-    <p>
-        This sample app is a combination of other .NET sample apps designed to create a single repo for everything needed for developing an app to integrate with Xero API.
-        <br>
-        <br>
-        In here you will find the following sample codes:
-    </p>
-    <ol>
-        <li>The original netstandard sample app with various API endpoints already operational in net9 target framework</li>
-        <li>Webhook sample code, this is further expanded to operate with Xero App Store Subscription</li>
-        <li>Sign up with Xero (Recommended Flow) which will create user in SQLite database with the user info by using MS entity framework core</li>
-        <li>Xero App Store Subscription sample code, make sure you set up the webhooks and subscription plans for your app from Xero developer portal to utilise this sample app</li>
-    </ol>
-</div>
 
-<br>
+<header class="text-center mb-3">
+    <h1 class="mb-1">Xero Sample App</h1>
+    <p class="text-muted">Choose how you would like to get started.</p>
+</header>
 
-<table class="table table-responsive-lg">
-    <tr>
-        <th>Sign Up with Xero Example Link</th>
-    </tr>
-    <tr>
-        <td>
-            <a asp-area="" asp-controller="SignUpWithXero" asp-action="ExecuteSignUpWithXero" style="text-decoration:underline; color: blue;">www.awesomeapp.com/xero-ssu</a>
-        </td>
-    </tr>
-    <tr>
-        <td><strong>Above link is a mock version URL for showcasing Sign Up with Xero.</strong><br>
-            <ol>
-                <li>It will lead the user to log into Xero, ask for access to retrieve user information as listed in the scope above OpenID, Profile, Email, Accounting Settings and Offline Access</li>
-                <li>Once allowed to share, the requested values will be sent to your redirect URI for you to create user account.</li>
-                <li>For this sample app, the account will be saved in the local SQLite database, if the user already exists, it will update the user's information</li>
-                <li>If your on-boarding flow requires manual approach, the data can be used to pre-fill contact us or registration form (Sign Up with Xero modified flow) instead.</li>
-                <li>You do not need to request for accounting.settings scope if you only wish to grab user info at this stage - this also ensures the user does not yet get considered as a referral.</li>
-            </ol>
-            When you are applying for Xero App Partnership Program, please Create a link similar to this when creating your own app and provide it to us the URL in form under "Purchase/Sign up page URL".<br>
-            <br>
-            <strong>Note.</strong><br>
-            <ul>
-                <li>It is really <span style="color: red";>important</span> that you implement the disconnection capability from your admin side for unwanted user connection</li>
-                    <ul>
-                        <li>Make sure you record the User ID, Tenant ID and Connection ID whenever a new connection is established</li>
-                        <li>Use <a href="https://devblog.xero.com/discover-xeros-client-credentials-with-postman-965f3581cbfc">client credential method</a> to manage the connections</li>
-                    </ul>
-                <li>If the user is already logged into Xero, the request for access to data will popup straight away</li>
-                    <ul>
-                        <li>You can remove access for the apps using your Xero account by going to <a href="https://identity.xero.com/account/apps/">https://identity.xero.com/account/apps/</a></li>
-                        <li>Once you removed the access for your app, next time you try to do Sign Up with Xero flow, OAuth2.0 flow will ask for the permission again</li>
-                    </ul>
-            </ul>
-        </td>
-    </tr>
+<br />
+<br />
+
+<table class="table text-center align-middle">
+    <tbody>
+        <tr>
+            <td>
+                <h3 class="mb-1">New here?</h2>
+                <p class="mb-2">Create your app account using your Xero identity.</p>
+                <a class="btn btn-xero" href="/SignUpWithXero/ExecuteSignUpWithXero">
+                    <img src="/images/xero-logo.svg" alt="Xero Logo" style="height:18px; margin-right:6px;">
+                    Sign Up with Xero
+                </a>
+            </td>
+            <td>
+                <h3 class="mb-1">Returning?</h2>
+                <p class="mb-2">Log in using your linked Xero account.</p>
+                <a class="btn btn-xero" href="/SignInWithXero/StartSignInWithXero">
+                    <img src="/images/xero-logo.svg" alt="Xero Logo" style="height:18px; margin-right:6px;">
+                    Sign In with Xero
+                </a>
+            </td>
+        </tr>
+    </tbody>
 </table>
+
+<br />
+<br />
+
+<details class="mb-3">
+    <summary class="h5 fw-bold">What does this sample app do?</summary>
+    <section class="mt-2">
+        <p>
+            This sample app is a combination of other .NET sample apps designed to create a single repo for everything needed for developing an app to integrate with Xero API.
+        </p>
+        <strong class="text-primary">In here you will find the following sample codes:</strong>
+        <ol class="mt-2">
+            <li>The original netstandard sample app with various API endpoints already operational in net9 target framework</li>
+            <li>Webhook sample code, this is further expanded to operate with Xero App Store Subscription</li>
+            <li>Sign up with Xero (Recommended Flow) which will create user in SQLite database with the user info by using MS entity framework core</li>
+            <li>Xero App Store Subscription sample code, make sure you set up the webhooks and subscription plans for your app from Xero developer portal to utilise this sample app</li>
+        </ol>
+    </section>
+</details>
+
+<details>
+    <summary class="h5 fw-bold">How does this work?</summary>
+    <section class="mt-2">
+        <p><strong class="text-primary">Above buttons are mock version URL for showcasing Sign Up with Xero and Sign In with Xero.</strong></p>
+        <ul>
+            <li>Both will lead the user to log into Xero, if they aren't already logged in. It will then ask for access to retrieve user information as listed in the scope above OpenID, Profile, Email, Accounting Settings and Offline Access</li>
+            <li>Once allowed, the requested values will be sent to your redirect URI to create or inspect for the user account.</li>
+            <li>For this sample app, the account will be saved in the local SQLite database. If the user already exists (identified with email), it will update the user's information such as connection established date</li>
+            <li>Depending on whether the user exists in the database or not, the app decides which path to take</li>
+        </ul>
+
+        <p><strong class="text-primary">In case of Sign Up with Xero</strong></p>
+        <ol>
+            <li>If the user already exists in the database, the app will treat this as Sign In with Xero instead</li>
+            <li>If the user does not exist, it will create a new user in the database using the tokens retrieved during OAuth2</li>
+            <li>If your on-boarding flow requires manual approach, the data can be used pre-fill a registration form (Modified flow)</li>
+            <li>During which you do not need to request <code>accounting.settings</code> scope if you only wish to grab user info</li>
+            <li>You can also mimic this by clicking Sign In with Xero button without having the account existing in the user database</li>
+        </ol>
+
+        <p><strong class="text-primary">In case of Sign In with Xero</strong></p>
+        <ol>
+            <li>As this process assumes the user is logging in, the scope requested here is the same as when the app is going through OAuth2 connection</li>
+            <li>If the user doesn't exist in the database, this will take the user to complete Sign Up with Xero - Modified flow</li>
+        </ol>
+
+        <p>
+            When applying for Xero App Partnership Program, create a link similar to this in your app and provide the URL under "Purchase/Sign up page URL".
+        </p>
+
+        <strong class="text-primary">Note.</strong>
+        <ul>
+            <li>It is really <span class="text-danger">important</span> that you implement disconnection capability for unwanted user connections</li>
+            <ul>
+                <li>Record the User ID, Tenant ID and Connection ID whenever a new connection is established</li>
+                <li>Use <a href="https://devblog.xero.com/discover-xeros-client-credentials-with-postman-965f3581cbfc">client credential method</a> to manage connections</li>
+            </ul>
+            <li>If the user is already logged into Xero, the request popup will appear straight away</li>
+            <ul>
+                <li>You can remove app access at <a href="https://identity.xero.com/account/apps/">https://identity.xero.com/account/apps/</a></li>
+                <li>After removing access, the next Sign Up with Xero attempt will trigger OAuth2 permission request again</li>
+            </ul>
+        </ul>
+    </section>
+</details>

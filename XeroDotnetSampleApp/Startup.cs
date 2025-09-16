@@ -23,13 +23,23 @@ namespace XeroDotnetSampleApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<XeroConfiguration>(Configuration.GetSection("XeroConfiguration"));
+            services.Configure<SignInWithXeroSettings>(Configuration.GetSection("SignInWithXeroSettings"));
             services.Configure<SignUpWithXeroSettings>(Configuration.GetSection("SignUpWithXeroSettings"));
             services.Configure<XeroAppStoreSubscriptionSettings>(Configuration.GetSection("XeroAppStoreSubscriptionSettings"));
             services.Configure<WebhookSettings>(Configuration.GetSection("WebhookSettings"));
             services.Configure<DatabaseConfiguration>(Configuration.GetSection("DatabaseConfiguration"));
 
             services.AddHttpClient();
-            services.AddSession();
+            
+            // Session (for simple logged-in state)
+            services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
+            
+            services.AddHttpContextAccessor();
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             
             services.AddDistributedMemoryCache();
