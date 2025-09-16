@@ -164,11 +164,6 @@ namespace XeroDotnetSampleApp.Controllers
             Guid.Parse(subscriptionItemId),
             quantity);
 
-            if (usageRecord != null)
-            {
-                TempData["UsagePostSuccessMessage"] = $"Usage posted successfully: {usageRecord.Quantity} x {usageRecord.PricePerUnit:C} = {usageRecord.Quantity * usageRecord.PricePerUnit:C} for item {usageRecord.SubscriptionItemId}";
-            }
-
             return RedirectToAction("GetSubscription");
         }
     }

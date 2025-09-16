@@ -7,6 +7,7 @@ using System.Text.Json;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
 
 using IdentityModel.Client;
 
@@ -32,7 +33,6 @@ namespace XeroDotnetSampleApp.Controllers
         protected readonly ITokenIO _tokenIO;
         protected readonly IOptions<XeroConfiguration> _xeroConfig;
         private readonly IOptions<SignUpWithXeroSettings> _signUpWithXeroSettings;
-        private readonly UserContext _userContext;
         private readonly DatabaseService _databaseService;
         private readonly XeroClient _client;
         private readonly HttpClient _httpClient;
@@ -43,14 +43,12 @@ namespace XeroDotnetSampleApp.Controllers
         // Constructor
         public SignUpWithXeroController(IOptions<XeroConfiguration> xeroConfig,
                                         IOptions<SignUpWithXeroSettings> signUpWithXeroSettings,
-                                        UserContext context,
                                         DatabaseService databaseService,
                                         IHttpClientFactory httpClientFactory)
         {
             _xeroConfig = xeroConfig;
             _client = new XeroClient(xeroConfig.Value);
             _signUpWithXeroSettings = signUpWithXeroSettings;
-            _userContext = context;
             _databaseService = databaseService;
             _httpClient = httpClientFactory.CreateClient();
 
@@ -95,7 +93,7 @@ namespace XeroDotnetSampleApp.Controllers
         public async Task<IActionResult> Callback(string code, string state)
         {
             var clientState = GetCurrentState();
-            if (state != clientState)
+            if (clientState == null || !string.Equals(clientState, state, StringComparison.Ordinal))
             {
                 return Content("Cross site forgery attack detected!");
             }
@@ -184,6 +182,12 @@ namespace XeroDotnetSampleApp.Controllers
             // However, if you wish to build the sign up with Xero - Modified flow, you would lead the
             // customer to your user registration / contact us form and use the values in usersFromDb
             // to pre-populate the form.
+
+            // "Log in" (session-based). Keep it simple – header can read these
+            HttpContext.Session.SetString("UserEmail", thisUser.Email);
+            HttpContext.Session.SetString("UserName", $"{thisUser.GivenName} {thisUser.FamilyName}");
+            HttpContext.Session.SetString("XeroUserId", thisUser.XeroUserId);
+
             return View("ReferralUserInfo", usersFromDb);
         }
 
